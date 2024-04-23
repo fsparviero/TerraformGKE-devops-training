@@ -1,42 +1,42 @@
-variable "name" {
-  description = "The name of the deployment"
-  type = string
-  default = "myapp"
-}
 
-variable "namespace" {
-  description = "The namespace of the deployment"
-  type = string
-  default = "preview"
-}
+resource "kubernetes_deployment" "app_deployment" {
+  metadata {
+    name      = var.name
+    namespace = var.namespace
+    
+    labels = {
+      app = var.myapp
+      env = var.environment
+    }
+  }
 
-variable "myapp" {
-  description = "The label for the application"
-  type = string
-  default = "myapp"
-}
+  spec {
+    replicas = var.replica
 
-variable "environment" {
-  description = "The environment label"
-  type = string
-  default = "preview"
-}
+    selector {
+      match_labels = {
+        app = var.myapp
+      }
+    }
 
-variable "replica" {
-  description = "Number of replicas for the deployment"
-  type = string
-  default = "1"
-}
+    template {
+      metadata {
+        labels = {
+          app = var.myapp
+        }
+      }
 
-variable "image" {
-  description = "The Docker image for the container"
-  type = string
-  default = "nginx"
-}
-
-variable "port" {
-  description = "The port to expose on the container"
-  type = string
-  default = "80"
-
+      spec {
+        container {
+          image = var.image
+          name = var.myapp
+          port{
+             container_port = var.port
+              }
+	  
+          
+        }
+      }
+    }
+  }
 }
