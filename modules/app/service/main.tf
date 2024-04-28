@@ -1,4 +1,3 @@
-
 resource "kubernetes_service" "app_service" {
   metadata {
     namespace = var.namespace
@@ -15,5 +14,9 @@ resource "kubernetes_service" "app_service" {
       port        = var.port
       target_port = var.targetPort
     }
+  }
+
+  selector = {
+    app = var.myapp
   }
 }
