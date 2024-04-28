@@ -9,6 +9,11 @@ variable "app" {
   type = string
   default = "myapp"
 }
+variable "myapp" {
+  description = "The name of the application"
+  type = string
+  default = "myapp"
+}
 
 variable "lb" {
   description = "The type of load balancer"
