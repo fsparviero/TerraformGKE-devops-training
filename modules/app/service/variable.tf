@@ -18,7 +18,7 @@ variable "myapp" {
 variable "lb" {
   description = "The type of load balancer"
   type = string
-  default = "LoadBalancer"
+  
 }
 
 variable "port" {
