@@ -22,11 +22,11 @@ provider "kubernetes" {
 
 
 resource "google_container_cluster" "mycluster" {
-  name     = "my-gke-cluster"
-  location = "us-central1"
+  name                     = "my-gke-cluster"
+  location                 = "us-central1"
   remove_default_node_pool = true
   initial_node_count       = 3
-  
+
 
 }
 
@@ -89,37 +89,37 @@ resource "kubernetes_namespace" "production" {
 }
 
 module "preview_deployments" {
-  source = "./modules/app/deployments"
+  source    = "./modules/app/deployments"
   namespace = kubernetes_namespace.preview.metadata[0].name
   # Add additional parameters as needed
 }
 
 module "staging_deployments" {
-  source = "./modules/app/deployments"
+  source    = "./modules/app/deployments"
   namespace = kubernetes_namespace.staging.metadata[0].name
   # Add additional parameters as needed
 }
 
 module "production_deployments" {
-  source = "./modules/app/deployments"
+  source    = "./modules/app/deployments"
   namespace = kubernetes_namespace.production.metadata[0].name
   # Add additional parameters as needed
 }
 
 module "preview_service" {
-  source = "./modules/app/service"
+  source    = "./modules/app/service"
   namespace = kubernetes_namespace.preview.metadata[0].name
   # Add additional parameters as needed
 }
 
 module "staging_service" {
-  source = "./modules/app/service"
+  source    = "./modules/app/service"
   namespace = kubernetes_namespace.staging.metadata[0].name
   # Add additional parameters as needed
 }
 
 module "production_service" {
-  source = "./modules/app/service"
+  source    = "./modules/app/service"
   namespace = kubernetes_namespace.production.metadata[0].name
   # Add additional parameters as needed
 }
